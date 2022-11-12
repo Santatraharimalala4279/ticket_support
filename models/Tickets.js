@@ -10,7 +10,7 @@ exports.Tickets = db.define(
     close: { type: sequelize.BOOLEAN, defaultValue: false },
     user_id: { type: sequelize.STRING, allowNull: false },
   },
-  { db, timestamps: false, tableName: "tickets" }
+  { timestamps: false, tableName: "tickets" }
 );
 this.Tickets.hasMany(Attachement, { foreignKey: "tickets_id" });
 Attachement.belongsTo(this.Tickets);
