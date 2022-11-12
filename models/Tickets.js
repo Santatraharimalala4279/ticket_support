@@ -12,4 +12,5 @@ exports.Tickets = db.define(
   },
   { timestamps: false, tableName: "tickets" }
 );
+
 this.Tickets.hasMany(Attachement);

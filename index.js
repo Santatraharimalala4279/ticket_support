@@ -33,6 +33,6 @@ const server = http.createServer(app);
 server.on("error", errorHandler);
 
 server.on("listening", () => {
-  console.info("Server is started on the port " + port);
+  console.info("Server started on the port " + port);
 });
 server.listen(port);

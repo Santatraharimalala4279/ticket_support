@@ -1,12 +1,14 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const { User } = require("../models/user");
+const { generateToken } = require("../utils/generateToken");
+
 exports.register = (req, res) => {
   const { email, password, passwordConfirm, admin } = req.body;
   if (email == null || password == null) {
     res.json({ message: "Missing parameter username or password" });
   }
   User.findOne({
-    attributes: ["email"],
     where: { email: email },
   }).then((userFound) => {
     if (!userFound) {
@@ -33,4 +35,40 @@ exports.register = (req, res) => {
       res.json({ message: "User already exist" });
     }
   });
+};
+exports.login = (req, res) => {
+  const { email, password } = req.body;
+  console.log({ email, password });
+  if (email == "" || password == "") {
+    res.status(404).json({ message: "Missing username or password" });
+  }
+  User.findOne({
+    where: { email: email },
+  })
+    .then((userFound) => {
+      if (userFound) {
+        bcrypt
+          .compare(password, userFound.password)
+          .then((valid) => {
+            if (valid) {
+              res.status(200).json({
+                message: "Connected Succseffuly",
+                userID: userFound.id,
+                admin: userFound.admin,
+                token: generateToken(userFound),
+              });
+            } else {
+              res.status(401).json({ message: "Password incorrect" });
+            }
+          })
+          .catch((error) => {
+            res.status(500).json({ error: error });
+          });
+      } else {
+        res.status(401).json({ message: "Email not found" });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 };

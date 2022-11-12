@@ -13,5 +13,5 @@ exports.User = db.define(
   },
   { timestamps: false, tableName: "user" }
 );
-this.User.hasMany(Tickets);
+this.User.hasMany(Tickets, { foreignKey: "user_id", as: "tickets" });
 this.User.hasMany(Response);

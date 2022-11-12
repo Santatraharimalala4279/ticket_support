@@ -1,7 +1,6 @@
 const sequelize = require("sequelize");
 const { db } = require("../config/db.config");
 const { Attachement } = require("./Attachement");
-const { User } = require("./user");
 
 exports.Response = db.define(
   "response",
