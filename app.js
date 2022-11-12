@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+const userRoutes = require("./routes/userRoutes");
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -24,4 +26,5 @@ app.get("/", (req, res) => {
   res.send("Welcome to support Tickets API");
 });
 
+app.use("/api/v1/auth", userRoutes);
 module.exports = app;
