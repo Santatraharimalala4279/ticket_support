@@ -1,6 +1,7 @@
 const sequelize = require("sequelize");
 const { db } = require("../config/db.config");
 const { Attachement } = require("./Attachement");
+const { Response } = require("./response");
 
 exports.Tickets = db.define(
   "tickets",
@@ -12,5 +13,8 @@ exports.Tickets = db.define(
   },
   { timestamps: false, tableName: "tickets" }
 );
+this.Tickets.hasMany(Attachement, { foreignKey: "tickets_id" });
+Attachement.belongsTo(this.Tickets);
 
-this.Tickets.hasMany(Attachement);
+this.Tickets.hasMany(Response, { foreignKey: "tickets_id" });
+Response.belongsTo(this.Tickets);

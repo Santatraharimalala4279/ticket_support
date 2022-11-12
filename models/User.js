@@ -13,5 +13,8 @@ exports.User = db.define(
   },
   { timestamps: false, tableName: "user" }
 );
-this.User.hasMany(Tickets, { foreignKey: "user_id", as: "tickets" });
-this.User.hasMany(Response);
+this.User.hasMany(Tickets, { foreignKey: "user_id" });
+Tickets.belongsTo(this.User);
+
+this.User.hasMany(Response, { foreignKey: "user_id" });
+Response.belongsTo(this.User);
