@@ -1,5 +1,5 @@
 const sequelize = require("sequelize");
-const { db } = require("../config/db.config");
+const db = require("../config/db.config");
 const { Response } = require("./response");
 const { Tickets } = require("./tickets");
 
@@ -13,6 +13,7 @@ exports.User = db.define(
   },
   { timestamps: false, tableName: "user" }
 );
+
 this.User.hasMany(Tickets, { foreignKey: "user_id" });
 Tickets.belongsTo(this.User);
 

@@ -3,6 +3,7 @@ const { User } = require("../models/user");
 
 exports.findAllTickets = (req, res) => {
   Tickets.findAll({ include: User })
+
     .then((tickets) => {
       res.status(200).json({ tickets: tickets });
     })
@@ -15,6 +16,7 @@ exports.findAllTicketsByUser = (req, res) => {
     include: [{ model: User, attributes: { id, email } }],
     where: { user_id: req.params.userid },
   })
+
     .thent((user) => {
       res.status(200).json({ data: user });
     })

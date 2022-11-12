@@ -1,8 +1,7 @@
 const sequelize = require("sequelize");
-const { db } = require("../config/db.config");
+const db = require("../config/db.config");
 const { Attachement } = require("./Attachement");
-const { Response } = require("./response");
-
+const { Response } = require("./Response");
 exports.Tickets = db.define(
   "tickets",
   {
@@ -11,7 +10,7 @@ exports.Tickets = db.define(
     close: { type: sequelize.BOOLEAN, defaultValue: false },
     user_id: { type: sequelize.STRING, allowNull: false },
   },
-  { timestamps: false, tableName: "tickets" }
+  { db, timestamps: false, tableName: "tickets" }
 );
 this.Tickets.hasMany(Attachement, { foreignKey: "tickets_id" });
 Attachement.belongsTo(this.Tickets);
