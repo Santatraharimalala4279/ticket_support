@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
+const path = require("path");
 const app = express();
 
 const userRoutes = require("./routes/userRoutes");
@@ -22,6 +23,8 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use("/file", express.static(path.join(__dirname, "file")));
 
 app.get("/", (req, res) => {
   res.send("Welcome to support Tickets API");
