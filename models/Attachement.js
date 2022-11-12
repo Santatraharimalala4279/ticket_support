@@ -12,5 +12,5 @@ exports.Attachement = db.define(
     },
     response_id: { type: sequelize.INTEGER, defaultValue: null },
   },
-  { timestamps: false, tableName: "file" }
+  { timestamps: false, tableName: "file", underscored: true }
 );

@@ -9,5 +9,5 @@ exports.Response = db.define(
     user_id: { type: sequelize.INTEGER, allowNull: false },
     ticket_id: { type: sequelize.INTEGER, allowNull: false },
   },
-  { timestamps: false, tableName: "response" }
+  { timestamps: false, tableName: "response", underscored: true }
 );

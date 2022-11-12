@@ -4,6 +4,8 @@ const auth = require("../middleware/auth");
 const ticketController = require("../controller/TicketController");
 
 router.get("/", ticketController.findAllTickets);
-router.get("/:userId", ticketController.findAllTickets);
-
+router.get("/userId/:userId", ticketController.findAllTicketsByUser);
+router.get("/id/:id", ticketController.findTicketById);
+router.post("/", ticketController.createTickets);
+router.put("/:id", ticketController.closeTicket);
 module.exports = router;
