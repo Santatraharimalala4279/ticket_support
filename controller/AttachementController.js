@@ -17,7 +17,7 @@ exports.saveFile = (req, res) => {
       .catch((error) => {
         res.status(500).json({
           error: error,
-          message: "Veuillez consultez le technicien,S'il vous plaît!",
+          message: "Veuillez consultez le ,S'il vous plaît!",
         });
       });
   } else {

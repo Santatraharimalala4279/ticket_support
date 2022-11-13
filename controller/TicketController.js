@@ -3,7 +3,12 @@ const { Tickets } = require("../models/tickets");
 const { User } = require("../models/user");
 
 exports.findAllTickets = (req, res) => {
-  Tickets.findAll({ include: User })
+  Tickets.findAll({
+    include: [
+      { model: User },
+      { model: Attachement, attributes: ["id", "filepath"] },
+    ],
+  })
 
     .then((tickets) => {
       res.status(200).json({ tickets: tickets });
@@ -14,7 +19,10 @@ exports.findAllTickets = (req, res) => {
 };
 exports.findAllTicketsByUser = (req, res) => {
   Tickets.findAll({
-    include: [{ model: User }],
+    include: [
+      { model: User },
+      { model: Attachement, attributes: ["id", "filepath"] },
+    ],
     where: { user_id: req.params.userid },
   })
     .then((ticket) => {
@@ -25,7 +33,13 @@ exports.findAllTicketsByUser = (req, res) => {
     });
 };
 exports.findTicketById = (req, res) => {
-  Tickets.findAll({ include: [{ model: User }], where: { id: req.params.id } })
+  Tickets.findAll({
+    include: [
+      { model: User },
+      { model: Attachement, attributes: ["id", "filepath"] },
+    ],
+    where: { id: req.params.id },
+  })
     .then((ticket) => {
       res.status(200).json({ ticket: ticket });
     })
