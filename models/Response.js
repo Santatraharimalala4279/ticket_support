@@ -1,5 +1,6 @@
 const sequelize = require("sequelize");
 const db = require("../config/db.config");
+const { Attachement } = require("./Attachement");
 
 exports.Response = db.define(
   "response",
@@ -11,3 +12,4 @@ exports.Response = db.define(
   },
   { timestamps: false, tableName: "response", underscored: true }
 );
+this.Response.hasMany(Attachement);

@@ -42,6 +42,7 @@ exports.createTickets = (req, res) => {
       Attachement.create({
         filepath: `${req.protocol}://${req.get("host")}/file/${filename}} `,
         tickets_id: tickets.id,
+        response_id: 0,
       })
         .then((file) => {
           res.status(200).json({ ticketsID: tickets.id, fileID: file.id });
