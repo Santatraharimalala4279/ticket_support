@@ -51,12 +51,13 @@ exports.findTicketById = (req, res) => {
 };
 exports.createTickets = (req, res) => {
   const { description, userId, filename } = req.body;
-  console.log(req.body);
-  // const userID = req.auth.userId;
+  console.log(req.file);
   Tickets.create({ description: description, user_id: userId })
     .then((tickets) => {
       Attachement.create({
-        filepath: `${req.protocol}://${req.get("host")}/file/${filename} `,
+        filepath: `${req.protocol}://${req.get("host")}/file/${
+          req.file.filename
+        } `,
         tickets_id: tickets.id,
         response_id: 0,
       })

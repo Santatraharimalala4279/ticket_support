@@ -38,7 +38,6 @@ exports.register = (req, res) => {
 };
 exports.login = (req, res) => {
   const { email, password } = req.body;
-  console.log({ email, password });
   if (email == "" || password == "") {
     res.status(404).json({ message: "Missing username or password" });
   }
@@ -52,7 +51,7 @@ exports.login = (req, res) => {
           .then((valid) => {
             if (valid) {
               res.status(200).json({
-                message: "Connected Succseffuly",
+                message: "Connected Successffuly",
                 userID: userFound.id,
                 admin: userFound.admin,
                 token: generateToken(userFound),
