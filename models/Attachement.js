@@ -6,7 +6,7 @@ exports.Attachement = db.define(
   {
     id: { type: sequelize.INTEGER, autoIncrement: true, primaryKey: true },
     filepath: { type: sequelize.STRING, allowNull: false },
-    ticket_id: {
+    tickets_id: {
       type: sequelize.INTEGER,
       defaultValue: null,
     },

@@ -34,25 +34,27 @@ exports.findTicketById = (req, res) => {
     });
 };
 exports.createTickets = (req, res) => {
-  const { description, userId } = req.body;
+  const { description, userId, filename } = req.body;
+  console.log(req.body);
   // const userID = req.auth.userId;
   Tickets.create({ description: description, user_id: userId })
     .then((tickets) => {
       Attachement.create({
-        filepath: `${req.protocol}://${req.get("host")}/file/${
-          req.file.filename
-        }} `,
-        ticket_id: tickets.id,
+        filepath: `${req.protocol}://${req.get("host")}/file/${filename}} `,
+        tickets_id: tickets.id,
       })
         .then((file) => {
           res.status(200).json({ ticketsID: tickets.id, fileID: file.id });
         })
         .catch((error) => {
-          res.status(400).json({ message: "Cannot save this file" });
+          console.log(error);
+          res
+            .status(400)
+            .json({ error: error, message: "Cannot save this file" });
         });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err });
+    .catch((error) => {
+      console.error(error);
     });
 };
 exports.closeTicket = (req, res) => {
