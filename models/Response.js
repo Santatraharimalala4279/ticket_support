@@ -8,7 +8,7 @@ exports.Response = db.define(
     id: { type: sequelize.INTEGER, autoIncrement: true, primaryKey: true },
     text: { type: sequelize.STRING, allowNull: false },
     user_id: { type: sequelize.INTEGER, allowNull: false },
-    ticket_id: { type: sequelize.INTEGER, allowNull: false },
+    tickets_id: { type: sequelize.INTEGER, allowNull: false },
   },
   { timestamps: false, tableName: "response", underscored: true }
 );

@@ -7,6 +7,7 @@ const app = express();
 const userRoutes = require("./routes/userRoutes");
 const ticketsRoutes = require("./routes/ticketRoutes");
 const fileRoutes = require("./routes/fileRoutes");
+const responseRoutes = require("./routes/responseRoutes");
 const db = require("./config/db.config");
 
 app.use((req, res, next) => {
@@ -32,6 +33,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to support Tickets API");
 });
 
+app.use("/api/v1/response", responseRoutes);
 app.use("/api/v1/file", fileRoutes);
 app.use("/api/v1/tickets", ticketsRoutes);
 app.use("/api/v1/auth", userRoutes);
