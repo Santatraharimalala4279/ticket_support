@@ -1,4 +1,5 @@
 const { Attachement } = require("../models/Attachement");
+const { Response } = require("../models/response");
 const { Tickets } = require("../models/tickets");
 const { User } = require("../models/user");
 
@@ -7,6 +8,7 @@ exports.findAllTickets = (req, res) => {
     include: [
       { model: User },
       { model: Attachement, attributes: ["id", "filepath"] },
+      { model: Response, attributes: ["id", "text", "user_id"] },
     ],
   })
 

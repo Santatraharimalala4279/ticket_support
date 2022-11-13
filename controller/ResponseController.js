@@ -1,9 +1,9 @@
 const { Response } = require("../models/response");
-const { Tickets } = require("../models/tickets");
+const { User } = require("../models/user");
 
 exports.replyTickets = (req, res) => {
   const { text, userId, ticketsId } = req.body;
-  Response.create({ text: text, user_id: userId, ticket_id: ticketsId })
+  Response.create({ text: text, user_id: userId, tickets_id: ticketsId })
     .then((response) => {
       res.status(200).json({ response: response, message: "Réponse réçu!" });
     })
@@ -12,7 +12,7 @@ exports.replyTickets = (req, res) => {
     });
 };
 exports.retrieveResponse = (req, res) => {
-  Response.findAll()
+  Response.findAll({ include: User })
     .then((response) => {
       res.status(200).json({ data: response });
     })
