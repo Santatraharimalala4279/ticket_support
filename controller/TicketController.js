@@ -25,7 +25,7 @@ exports.findAllTicketsByUser = (req, res) => {
     });
 };
 exports.findTicketById = (req, res) => {
-  Tickets.find({ includes: User }, { where: { id: req.params.id } })
+  Tickets.findAll({ include: [{ model: User }], where: { id: req.params.id } })
     .then((ticket) => {
       res.status(200).json({ ticket: ticket });
     })
@@ -40,7 +40,7 @@ exports.createTickets = (req, res) => {
   Tickets.create({ description: description, user_id: userId })
     .then((tickets) => {
       Attachement.create({
-        filepath: `${req.protocol}://${req.get("host")}/file/${filename}} `,
+        filepath: `${req.protocol}://${req.get("host")}/file/${filename} `,
         tickets_id: tickets.id,
         response_id: 0,
       })

@@ -8,8 +8,9 @@ exports.Attachement = db.define(
     filepath: { type: sequelize.STRING, allowNull: false },
     tickets_id: {
       type: sequelize.INTEGER,
+      allowNull: true,
     },
-    response_id: { type: sequelize.INTEGER },
+    response_id: { type: sequelize.INTEGER, allowNull: true },
   },
   { timestamps: false, tableName: "file", underscored: true }
 );

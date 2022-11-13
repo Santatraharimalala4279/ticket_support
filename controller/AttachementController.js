@@ -6,7 +6,7 @@ exports.saveFile = (req, res) => {
     Attachement.create({
       filepath: filepath,
       tickets_id: ticketId,
-      response_id: 0,
+      response_id: responseId,
     })
       .then((filetickets) => {
         res.status(200).json({
@@ -17,14 +17,14 @@ exports.saveFile = (req, res) => {
       .catch((error) => {
         res.status(500).json({
           error: error,
-          message: "Veuillez consultez le technicienc,S'il vous plaît!",
+          message: "Veuillez consultez le technicien,S'il vous plaît!",
         });
       });
   } else {
     Attachement.create({
       filepath: filepath,
       response_id: responseId,
-      tickets_id: 0,
+      tickets_id: ticketId,
     })
       .then((filetickets) => {
         res.status(200).json({

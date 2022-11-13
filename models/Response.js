@@ -13,3 +13,4 @@ exports.Response = db.define(
   { timestamps: false, tableName: "response", underscored: true }
 );
 this.Response.hasMany(Attachement);
+Attachement.belongsTo(this.Response);
