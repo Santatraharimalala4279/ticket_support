@@ -1,12 +1,14 @@
 const { Attachement } = require("../models/Attachement");
 
 exports.saveFile = (req, res) => {
-  const { filepath, ticketId, responseId } = req.body;
-  if (ticketId != "") {
+  const { ticketId, responseId } = req.body;
+  console.log(req.file.filename);
+  filepath = req.file.filename;
+  if (ticketId) {
     Attachement.create({
       filepath: filepath,
       tickets_id: ticketId,
-      response_id: responseId,
+      response_id: 0,
     })
       .then((filetickets) => {
         res.status(200).json({
@@ -22,9 +24,8 @@ exports.saveFile = (req, res) => {
       });
   } else {
     Attachement.create({
-      filepath: filepath,
       response_id: responseId,
-      tickets_id: ticketId,
+      tickets_id: 0,
     })
       .then((filetickets) => {
         res.status(200).json({
