@@ -50,26 +50,12 @@ exports.findTicketById = (req, res) => {
     });
 };
 exports.createTickets = (req, res) => {
-  const { description, userId, filename } = req.body;
-  console.log(req.file);
+  const { description, userId } = req.body;
   Tickets.create({ description: description, user_id: userId })
     .then((tickets) => {
-      Attachement.create({
-        filepath: `${req.protocol}://${req.get("host")}/file/${
-          req.file.filename
-        } `,
-        tickets_id: tickets.id,
-        response_id: 0,
-      })
-        .then((file) => {
-          res.status(200).json({ ticketsID: tickets.id, fileID: file.id });
-        })
-        .catch((error) => {
-          console.log(error);
-          res
-            .status(400)
-            .json({ error: error, message: "Cannot save this file" });
-        });
+      res
+        .status(200)
+        .json({ ticketId: tickets.id, message: "Tickets created!" });
     })
     .catch((error) => {
       console.error(error);

@@ -1,13 +1,11 @@
 const multer = require("multer");
 
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, "file");
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public");
   },
-  filename: (req, file, callback) => {
-    const name = file.originalname.split(" ").join("_");
-    const extension = file.mimetype;
-    callback(null, name + Date.now() + "." + extension);
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
   },
 });
 
