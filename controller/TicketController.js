@@ -1,7 +1,7 @@
 const { Attachement } = require("../models/Attachement");
-const { Response } = require("../models/response");
-const { Tickets } = require("../models/tickets");
-const { User } = require("../models/user");
+const { Response } = require("../models/Response");
+const { Tickets } = require("../models/Tickets");
+const { User } = require("../models/User");
 
 exports.findAllTickets = (req, res) => {
   Tickets.findAll({

@@ -1,5 +1,5 @@
-const { Response } = require("../models/response");
-const { User } = require("../models/user");
+const { Response } = require("../models/Response");
+const { User } = require("../models/User");
 
 exports.replyTickets = (req, res) => {
   const { text, userId, ticketsId } = req.body;
