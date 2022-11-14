@@ -65,7 +65,15 @@ exports.createTickets = (req, res) => {
     res.json({ message: "Please fill the field description!" });
   }
 };
-exports.deleteTicket = (req, res) => {};
+exports.deleteTicket = (req, res) => {
+  Tickets.destroy({ where: { id: req.params.id } })
+    .then((response) => {
+      res.json({ message: "Tickets deleted!" });
+    })
+    .catch((err) => {
+      res.json({ message: "Unable to delete!" });
+    });
+};
 exports.closeTicket = (req, res) => {
   if (req.params.id) {
     const ticket = Tickets.find({ where: { id: req.params.id } });
