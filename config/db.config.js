@@ -9,7 +9,7 @@ let db = new Sequelize(env.DB_DATABASE, env.DB_USER, env.DB_PASSWORD, {
 //on exporte pour utiliser notre connexion depuis les autre fichiers.
 db.authenticate()
   .then(() => {
-    console.log("Connection has been established successfully.");
+    console.log("Connection to Database has been established successfully.");
   })
   .catch((err) => {
     console.log("Unable to connect to the database:", err);
