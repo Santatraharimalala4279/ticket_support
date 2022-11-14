@@ -8,7 +8,10 @@ exports.Tickets = db.define(
     id: { type: sequelize.INTEGER, autoIncrement: true, primaryKey: true },
     description: { type: sequelize.STRING, allowNull: false },
     close: { type: sequelize.BOOLEAN, defaultValue: false },
-    user_id: { type: sequelize.STRING, allowNull: false },
+    user_id: {
+      type: sequelize.STRING,
+      allowNull: false,
+    },
   },
   { timestamps: false, tableName: "tickets", underscored: true }
 );

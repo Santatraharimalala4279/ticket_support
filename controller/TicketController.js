@@ -6,17 +6,16 @@ const { User } = require("../models/User");
 exports.findAllTickets = (req, res) => {
   Tickets.findAll({
     include: [
-      { model: User },
       { model: Attachement, attributes: ["id", "filepath"] },
       { model: Response, attributes: ["id", "text", "user_id"] },
     ],
   })
-
     .then((tickets) => {
       res.status(200).json({ tickets: tickets });
     })
     .catch((error) => {
-      res.status(500).json({ error: error });
+      console.log(error);
+      res.status(500).json({ error: error, message: error });
     });
 };
 exports.findAllTicketsByUser = (req, res) => {

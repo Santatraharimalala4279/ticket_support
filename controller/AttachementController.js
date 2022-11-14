@@ -4,7 +4,7 @@ exports.saveFile = (req, res) => {
   const { ticketId, responseId } = req.body;
   console.log(req.file.filename);
   filepath = req.file.filename;
-  if (ticketId) {
+  if (ticketId !== "") {
     Attachement.create({
       filepath: filepath,
       tickets_id: ticketId,
@@ -19,7 +19,7 @@ exports.saveFile = (req, res) => {
       .catch((error) => {
         res.status(500).json({
           error: error,
-          message: "Veuillez consultez le ,S'il vous plaît!",
+          message: "Erreur survenu!",
         });
       });
   } else {
@@ -36,7 +36,7 @@ exports.saveFile = (req, res) => {
       .catch((error) => {
         res.status(500).json({
           error: error,
-          message: "Veuillez consultez le technicien,S'il vous plaît!",
+          message: "Erreur survenue",
         });
       });
   }
