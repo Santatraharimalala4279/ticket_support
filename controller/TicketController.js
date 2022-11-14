@@ -51,16 +51,21 @@ exports.findTicketById = (req, res) => {
 };
 exports.createTickets = (req, res) => {
   const { description, userId } = req.body;
-  Tickets.create({ description: description, user_id: userId })
-    .then((tickets) => {
-      res
-        .status(200)
-        .json({ ticketId: tickets.id, message: "Tickets created!" });
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  if (!(description == null || description == "")) {
+    Tickets.create({ description: description, user_id: userId })
+      .then((tickets) => {
+        res
+          .status(200)
+          .json({ ticketId: tickets.id, message: "Tickets created!" });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    res.json({ message: "Please fill the field description!" });
+  }
 };
+exports.deleteTicket = (req, res) => {};
 exports.closeTicket = (req, res) => {
   if (req.params.id) {
     const ticket = Tickets.find({ where: { id: req.params.id } });

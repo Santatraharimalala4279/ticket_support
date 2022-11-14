@@ -1,22 +1,23 @@
 const { Attachement } = require("../models/Attachement");
 
 exports.saveFile = (req, res) => {
-  const { ticketId, responseId } = req.body;
-  console.log(req.file.filename);
-  filepath = req.file.filename;
-  if (ticketId !== "") {
+  filepath = `${req.protocol}://${req.protocol}://${req.get("host")}/file/${
+    req.file.filename
+  }`;
+  if (req.params.isTicket) {
     Attachement.create({
       filepath: filepath,
-      tickets_id: ticketId,
+      tickets_id: req.params.id,
       response_id: 0,
     })
       .then((filetickets) => {
         res.status(200).json({
           data: filetickets,
-          message: `Fichier pour le tickets ${ticketId} enregistré`,
+          message: `File for tickets ${req.params.id} saved!`,
         });
       })
       .catch((error) => {
+        console.log(error);
         res.status(500).json({
           error: error,
           message: "Erreur survenu!",
@@ -24,7 +25,7 @@ exports.saveFile = (req, res) => {
       });
   } else {
     Attachement.create({
-      response_id: responseId,
+      response_id: req.params.id,
       tickets_id: 0,
     })
       .then((filetickets) => {
