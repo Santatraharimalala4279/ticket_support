@@ -4,7 +4,7 @@ const { Response } = require("./response");
 const { Tickets } = require("./tickets");
 
 exports.User = db.define(
-  "user",
+  "User",
   {
     id: { type: sequelize.INTEGER, autoIncrement: true, primaryKey: true },
     email: { type: sequelize.STRING, allowNull: false, unique: true },
