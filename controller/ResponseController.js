@@ -2,13 +2,19 @@ const { Response } = require("../models/Response");
 const { User } = require("../models/User");
 
 exports.replyTickets = (req, res) => {
-  const { text, userId, ticketsId } = req.body;
-  Response.create({ text: text, user_id: userId, tickets_id: ticketsId })
+  const { text } = req.body;
+  Response.create({
+    text: text,
+    user_id: req.params.userId,
+    tickets_id: req.params.ticketsId,
+  })
     .then((response) => {
-      res.status(200).json({ response: response, message: "Réponse réçu!" });
+      res
+        .status(200)
+        .json({ response: response, message: "Response received!" });
     })
     .catch((error) => {
-      res.status(500).json({ message: "Reponse réfusé", error: error });
+      res.status(500).json({ message: "Response refused!", error: error });
     });
 };
 exports.retrieveResponse = (req, res) => {
