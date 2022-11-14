@@ -1,7 +1,7 @@
 const sequelize = require("sequelize");
 const db = require("../config/db.config");
-const { Response } = require("./response");
-const { Tickets } = require("./tickets");
+const { Response } = require("./Response");
+const { Tickets } = require("./Tickets");
 
 exports.User = db.define(
   "user",

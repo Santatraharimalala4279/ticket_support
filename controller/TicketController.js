@@ -6,6 +6,7 @@ const { User } = require("../models/User");
 exports.findAllTickets = (req, res) => {
   Tickets.findAll({
     include: [
+      { model: User, attributes: ["id", "email"] },
       { model: Attachement, attributes: ["id", "filepath"] },
       { model: Response, attributes: ["id", "text", "user_id"] },
     ],
