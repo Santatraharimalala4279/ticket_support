@@ -1,10 +1,11 @@
 const { Attachement } = require("../models/Attachement");
 
 exports.saveFile = (req, res) => {
-  filepath = `${req.protocol}://${req.protocol}://${req.get("host")}/file/${
-    req.file.filename
-  }`;
-  if (req.params.isTicket) {
+  const filepath = `${req.protocol}://${req.get(
+    "host"
+  )}/file/${req.file.filename.replace(/\s+/g, "")}`;
+
+  if (req.params.isTicket == "true") {
     Attachement.create({
       filepath: filepath,
       tickets_id: req.params.id,
@@ -23,21 +24,23 @@ exports.saveFile = (req, res) => {
           message: "Erreur survenu!",
         });
       });
-  } else {
+  } else if (req.params.isTicket == "false") {
     Attachement.create({
+      filepath: filepath,
+      tickets_id: "0",
       response_id: req.params.id,
-      tickets_id: 0,
     })
       .then((filetickets) => {
         res.status(200).json({
           data: filetickets,
-          message: `Fichier de la réponse du tickets enregistré`,
+          message: `File saved!`,
         });
       })
       .catch((error) => {
+        console.log(error);
         res.status(500).json({
           error: error,
-          message: "Erreur survenue",
+          message: "Erreur survenu!",
         });
       });
   }

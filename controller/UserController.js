@@ -4,7 +4,9 @@ const { User } = require("../models/User");
 const { generateToken } = require("../utils/generateToken");
 
 exports.register = (req, res) => {
-  const { email, password, passwordConfirm, admin } = req.body;
+  const { email, admin } = req.body;
+  const password = "" + req.body.password;
+  const passwordConfirm = "" + req.body.passwordConfirm;
   if (email == null || password == null) {
     res.json({ message: "Missing username or password" });
   }
@@ -12,15 +14,16 @@ exports.register = (req, res) => {
     where: { email: email },
   }).then((userFound) => {
     if (!userFound) {
-      if (password == passwordConfirm) {
+      console.log(password.toString() + " " + passwordConfirm.toString());
+      if (password.localeCompare(passwordConfirm) == 0) {
         bcrypt.hash(password, 12, (error, passwordCrypted) => {
-          let newUser = User.create({
+          User.create({
             email: email,
             password: passwordCrypted,
             admin: admin,
           })
             .then((newUser) => {
-              res.json({ userID: newUser.id });
+              res.json({ userID: newUser.id, message: "User Created!" });
             })
             .catch((err) => {
               res.json({

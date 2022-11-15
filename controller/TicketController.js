@@ -82,9 +82,7 @@ exports.closeTicket = (req, res) => {
     if (ticket) {
       Tickets.update({ close: true }, { where: { id: req.params.id } }).then(
         (result) => {
-          res
-            .status(200)
-            .json({ message: `Ticket ID ${req.params.ticketId} Closed!` });
+          res.status(200).json({ message: `Ticket  ${req.params.id} Closed!` });
         }
       );
     } else {
