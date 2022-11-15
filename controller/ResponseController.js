@@ -18,7 +18,7 @@ exports.replyTickets = (req, res) => {
     });
 };
 exports.retrieveResponse = (req, res) => {
-  Response.findAll({ include: User })
+  Response.findAll({ include: { model: User, attributes: ["id", "email"] } })
     .then((response) => {
       res.status(200).json({ data: response });
     })

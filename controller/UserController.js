@@ -6,7 +6,7 @@ const { generateToken } = require("../utils/generateToken");
 exports.register = (req, res) => {
   const { email, password, passwordConfirm, admin } = req.body;
   if (email == null || password == null) {
-    res.json({ message: "Missing parameter username or password" });
+    res.json({ message: "Missing username or password" });
   }
   User.findOne({
     where: { email: email },

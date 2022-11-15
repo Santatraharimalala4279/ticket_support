@@ -22,7 +22,7 @@ exports.findAllTickets = (req, res) => {
 exports.findAllTicketsByUser = (req, res) => {
   Tickets.findAll({
     include: [
-      { model: User },
+      { model: User, attributes: ["id", "email"] },
       { model: Attachement, attributes: ["id", "filepath"] },
     ],
     where: { user_id: req.params.userid },
@@ -37,8 +37,9 @@ exports.findAllTicketsByUser = (req, res) => {
 exports.findTicketById = (req, res) => {
   Tickets.findAll({
     include: [
-      { model: User },
+      { model: User, attributes: ["id", "email"] },
       { model: Attachement, attributes: ["id", "filepath"] },
+      { model: Response, attributes: ["id", "text", "user_id"] },
     ],
     where: { id: req.params.id },
   })
