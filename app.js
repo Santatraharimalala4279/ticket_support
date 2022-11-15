@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const app = express();
-
+const fs = require("fs");
 const userRoutes = require("./routes/userRoutes");
 const ticketsRoutes = require("./routes/ticketRoutes");
 const fileRoutes = require("./routes/fileRoutes");
@@ -27,6 +27,10 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+const dir = __dirname + "/file";
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir);
+}
 app.use("/file", express.static(path.join(__dirname, "file")));
 
 app.get("/", (req, res) => {
