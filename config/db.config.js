@@ -6,5 +6,4 @@ let db = new Sequelize(env.DB_DATABASE, env.DB_USER, env.DB_PASSWORD, {
   dialect: "mysql",
   logging: false,
 });
-console.log("Connected to Database");
 module.exports = db;
